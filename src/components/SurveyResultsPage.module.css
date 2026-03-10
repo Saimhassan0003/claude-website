@@ -1,0 +1,739 @@
+/* ─────────────────────────────────────────
+   SurveyResultsPage.module.css  — Premium Report
+───────────────────────────────────────── */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  background-color: #0d1b2a;
+  min-height: 100%;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.pageContent {
+  max-width: 1060px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px 48px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── Combined Banner ── */
+.combinedBanner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 22px 32px;
+  border: 1px solid;
+  border-radius: 8px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+}
+
+.combinedEyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.combinedDemand {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+
+.combinedSub {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+}
+
+.combinedBig {
+  font-family: 'Playfair Display', serif;
+  font-size: 52px;
+  font-weight: 400;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.combinedBigDen {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  color: rgba(255,255,255,0.3);
+}
+
+/* ── Report Block wrapper ── */
+.reportBlock {
+  position: relative;
+  margin-bottom: 48px;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.reportBlockLabel {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  color: #fff;
+  width: fit-content;
+}
+
+/* ── Each Report Shell ── */
+.dmReport,
+.empReport {
+  padding: 0;
+}
+
+/* ── Report Header ── */
+.reportHeader {
+  padding: 28px 36px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.reportEyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.reportHeroTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 34px;
+  font-weight: 400;
+  color: #fff;
+  margin: 0 0 8px;
+  line-height: 1.2;
+}
+
+.reportSubline {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #6b7a8d;
+}
+
+/* ── Report Body (2-col) ── */
+.reportBody {
+  display: flex;
+  gap: 0;
+  align-items: flex-start;
+}
+
+.reportMain {
+  flex: 1;
+  padding: 28px 32px 32px;
+  border-right: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  min-width: 0;
+}
+
+/* ── Score Card ── */
+.scoreCard {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  padding: 24px 28px;
+  border: 1px solid;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.02);
+  flex-wrap: wrap;
+}
+
+.gaugeCircleWrap {
+  flex-shrink: 0;
+}
+
+.scoreCardMeta {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tierTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 400;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.tierBadge {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid;
+  border-radius: 3px;
+  padding: 4px 10px;
+  width: fit-content;
+}
+
+.tierDesc {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ── Gap Section ── */
+.gapSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.gapTitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+/* ── Horizontal Bar ── */
+.hBarRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.hBarLabel {
+  font-family: 'Inter', sans-serif;
+  font-size: 12.5px;
+  color: #8a9bb0;
+  width: 200px;
+  flex-shrink: 0;
+}
+
+.hBarTrackWrap {
+  flex: 1;
+  position: relative;
+}
+
+.hBarTrack {
+  position: relative;
+  height: 6px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 3px;
+  overflow: visible;
+}
+
+.hBarFill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.8s ease;
+}
+
+.hBarBenchmark {
+  position: absolute;
+  top: -4px;
+  width: 2px;
+  height: 14px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 1px;
+  transform: translateX(-50%);
+}
+
+.hBarValue {
+  font-family: 'Inter', sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  width: 38px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.barLegend {
+  display: flex;
+  gap: 18px;
+  margin-top: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: #6b7a8d;
+}
+
+.legendDot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+/* ── Dimension Grid (Employee) ── */
+.dimGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.dimCard {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 6px;
+  padding: 14px 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dimLabel {
+  font-family: 'Inter', sans-serif;
+  font-size: 12.5px;
+  color: #8a9bb0;
+}
+
+.dimBar {
+  height: 5px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.dimBarFill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.8s ease;
+}
+
+.dimScore {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ── Report Actions ── */
+.reportActions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.actionPrimary {
+  font-family: 'Inter', sans-serif;
+  font-size: 13.5px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  padding: 12px 24px;
+  border-radius: 4px;
+  transition: opacity 0.15s ease;
+}
+
+.actionPrimary:hover { opacity: 0.88; }
+
+.actionOutline {
+  font-family: 'Inter', sans-serif;
+  font-size: 13.5px;
+  font-weight: 400;
+  background: none;
+  border: 1px solid;
+  cursor: pointer;
+  padding: 11px 20px;
+  border-radius: 4px;
+  transition: opacity 0.15s ease;
+}
+
+.actionOutline:hover { opacity: 0.75; }
+
+/* ── Sidebar ── */
+.reportSidebar {
+  width: 260px;
+  flex-shrink: 0;
+  padding: 28px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sidebarBox {
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sidebarBoxTitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.statRow {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.statRow:last-child { border-bottom: none; padding-bottom: 0; }
+
+.statLabel {
+  font-family: 'Inter', sans-serif;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+
+.statValue {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+/* ── Pilot / AI Guide Card ── */
+.pilotCard {
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pilotTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: #fff;
+  margin: 0;
+}
+
+.pilotDesc {
+  font-family: 'Inter', sans-serif;
+  font-size: 12.5px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.6;
+}
+
+.pilotBtn {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  padding: 11px 16px;
+  border-radius: 4px;
+  text-align: center;
+  transition: opacity 0.15s ease;
+  width: 100%;
+}
+
+.pilotBtn:hover { opacity: 0.88; }
+
+/* ── Not Completed ── */
+.notCompleted {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 28px 32px;
+  border: 1px dashed;
+  margin: 20px 20px 20px;
+  border-radius: 6px;
+  flex-wrap: wrap;
+  background: rgba(255,255,255,0.01);
+}
+
+.notCompletedIcon { font-size: 28px; }
+
+.notCompletedTitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #8a9bb0;
+  margin-bottom: 4px;
+}
+
+.notCompletedDesc {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #3d4f62;
+  line-height: 1.5;
+}
+
+.notCompletedBtn {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  background: none;
+  border: 1px solid;
+  cursor: pointer;
+  padding: 9px 20px;
+  border-radius: 4px;
+  margin-left: auto;
+  white-space: nowrap;
+  transition: opacity 0.15s ease;
+}
+
+.notCompletedBtn:hover { opacity: 0.75; }
+
+/* ── Bottom Actions ── */
+.bottomActions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-top: 12px;
+}
+
+.btnGold {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #0d1b2a;
+  background: #c8973a;
+  border: none;
+  cursor: pointer;
+  padding: 12px 26px;
+  border-radius: 4px;
+  transition: background-color 0.15s ease;
+}
+
+.btnGold:hover { background-color: #d4a94a; }
+
+.btnGhost {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #6b7a8d;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.btnGhost:hover { color: #8a9bb0; }
+
+.trustNote {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: #3d4f62;
+  margin-left: auto;
+}
+
+/* ── Bottom Banner ── */
+.bottomBanner {
+  background-color: #0a1520;
+  border-top: 1px solid rgba(200,151,58,0.08);
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: #4a5a6d;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* ─────────────────────────────────────────
+   MOBILE RESPONSIVENESS
+───────────────────────────────────────── */
+/* Tablet (1024px) */
+@media (max-width: 1024px) {
+  .pageContent {
+    padding: 30px 24px 40px;
+  }
+
+  .reportMain {
+    padding: 24px 20px;
+  }
+
+  .reportSidebar {
+    width: 220px;
+    padding: 24px 20px;
+  }
+}
+
+/* Mobile (768px) */
+@media (max-width: 768px) {
+  .pageContent {
+    padding: 20px 24px 40px;
+  }
+
+  .combinedBanner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 24px;
+    text-align: left;
+  }
+
+  .combinedBig {
+    font-size: 42px;
+  }
+
+  .reportHeader {
+    padding: 20px 24px 16px;
+  }
+
+  .reportHeroTitle {
+    font-size: 26px;
+  }
+
+  .reportBody {
+    flex-direction: column;
+  }
+
+  .reportMain {
+    padding: 20px 24px 24px;
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .scoreCard {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px;
+  }
+
+  .tierTitle {
+    font-size: 18px;
+  }
+
+  .hBarRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .hBarLabel {
+    width: 100%;
+  }
+
+  .hBarTrackWrap {
+    width: 100%;
+  }
+
+  .hBarValue {
+    width: auto;
+    text-align: left;
+    margin-top: 4px;
+  }
+
+  .dimGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .reportActions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .actionPrimary, .actionOutline {
+    width: 100%;
+    text-align: center;
+  }
+
+  .reportSidebar {
+    width: 100%;
+    padding: 24px;
+  }
+
+  .notCompleted {
+    margin: 16px;
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .notCompletedBtn {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .bottomActions {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 20px 24px;
+  }
+
+  .trustNote {
+    margin-left: 0;
+    text-align: center;
+    margin-top: 12px;
+  }
+}
+
+/* Small Smartphone (480px) */
+@media (max-width: 480px) {
+  .pageContent {
+    padding: 16px 16px 30px;
+  }
+
+  .combinedBanner {
+    padding: 16px 20px;
+  }
+
+  .combinedDemand {
+    font-size: 18px;
+  }
+
+  .combinedBig {
+    font-size: 32px;
+  }
+
+  .reportHeader {
+    padding: 16px 20px 12px;
+  }
+
+  .reportHeroTitle {
+    font-size: 22px;
+  }
+
+  .reportMain {
+    padding: 16px 20px 20px;
+  }
+
+  .scoreCard {
+    padding: 16px;
+  }
+
+  .tierTitle {
+    font-size: 16px;
+  }
+
+  .reportSidebar {
+    padding: 20px;
+  }
+}
