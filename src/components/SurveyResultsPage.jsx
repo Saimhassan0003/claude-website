@@ -113,6 +113,29 @@ const DMReport = ({ data, onDownloadPDF }) => {
   const critical = [...gaps].sort((a, b) => a.value - b.value)[0]
   const strongest = [...gaps].sort((a, b) => b.value - a.value)[0]
 
+  /* Share handler */
+  const handleShare = async () => {
+    const text = `Check out my Organization's Readiness Score on SEHATTI: ${score}/100!`
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'SEHATTI Organizational Readiness',
+          text: text,
+          url: window.location.href,
+        })
+      } catch (err) {
+        console.error('Error sharing:', err)
+      }
+    } else {
+      try {
+        await navigator.clipboard.writeText(`${text} ${window.location.href}`)
+        alert('Results summary copied to clipboard!')
+      } catch (err) {
+        console.error('Error copying to clipboard:', err)
+      }
+    }
+  }
+
   return (
     <div className={styles.dmReport}>
       {/* ── Header ── */}
@@ -169,11 +192,9 @@ const DMReport = ({ data, onDownloadPDF }) => {
               onClick={onDownloadPDF}>
               📄 Download Full Report (PDF)
             </button>
-            <button className={styles.actionOutline} style={{ borderColor: 'rgba(76,175,125,0.4)', color: '#4caf7d' }}>
-              Book Strategy Consultation
-            </button>
-            <button className={styles.actionOutline} style={{ borderColor: 'rgba(76,175,125,0.2)', color: '#8a9bb0' }}>
-              Explore Pilot Program
+            <button className={styles.actionOutline} style={{ borderColor: 'rgba(76,175,125,0.4)', color: '#4caf7d' }}
+              onClick={handleShare}>
+              Share Results
             </button>
           </div>
         </div>
@@ -271,6 +292,29 @@ const EmpReport = ({ data, onDownloadPDF }) => {
 
   const dimColor = (s) => s >= 70 ? '#4caf7d' : s >= 45 ? '#c8973a' : '#e05c5c'
 
+  /* Share handler */
+  const handleShare = async () => {
+    const text = `Check out my Wellbeing Score on SEHATTI: ${score}/100!`
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'SEHATTI Wellbeing Score',
+          text: text,
+          url: window.location.href,
+        })
+      } catch (err) {
+        console.error('Error sharing:', err)
+      }
+    } else {
+      try {
+        await navigator.clipboard.writeText(`${text} ${window.location.href}`)
+        alert('Results summary copied to clipboard!')
+      } catch (err) {
+        console.error('Error copying to clipboard:', err)
+      }
+    }
+  }
+
   return (
     <div className={styles.empReport}>
       {/* ── Header ── */}
@@ -328,10 +372,8 @@ const EmpReport = ({ data, onDownloadPDF }) => {
               onClick={onDownloadPDF}>
               📄 Download My Report (PDF)
             </button>
-            <button className={styles.actionOutline} style={{ borderColor: 'rgba(200,151,58,0.4)', color: '#c8973a' }}>
-              Book 1:1 Coaching Session
-            </button>
-            <button className={styles.actionOutline} style={{ borderColor: 'rgba(255,255,255,0.1)', color: '#6b7a8d' }}>
+            <button className={styles.actionOutline} style={{ borderColor: 'rgba(200,151,58,0.4)', color: '#c8973a' }}
+              onClick={handleShare}>
               Share Results
             </button>
           </div>
@@ -408,12 +450,11 @@ const SurveyResultsPage = ({
   const demandText = finalScore >= 4 ? '🟢 Strong product demand'
     : finalScore >= 3 ? '🟡 Moderate demand' : '🔴 Weak demand'
 
-  /* ── Generate PDF (only for current role) ── */
+  /* ── Generate PDF (Updated for visibility and robustness) ── */
   const handleGeneratePDF = () => {
     const dmScore = hasDecision ? toHundred(decisionScore) : null
     const empScore = hasEmployee ? toHundred(employeeScore) : null
     
-    // Using hasDecision + hasEmployee to figure out if both exist
     const finalS = dmScore && empScore ? ((parseFloat(dmScore) + parseFloat(empScore)) / 2).toFixed(0) : null
     const demand = finalS >= 80 ? '🟢 Strong product demand' : finalS >= 60 ? '🟡 Moderate demand' : '🔴 Weak demand'
 
@@ -422,56 +463,75 @@ const SurveyResultsPage = ({
     const roleLabel = isDecision ? 'Decision Maker Report' : 'Employee Wellbeing Report'
     const scoreLabel = isDecision ? 'Organizational Readiness Score' : 'Wellbeing Score'
 
-    const html = `<div style="font-family:Arial,sans-serif;background:#0d1b2a;color:#fff;padding:48px">
-      <h1 style="font-size:18px;color:${accent};margin:0 0 4px">SEHATTI · GCC WELLBEING SURVEY</h1>
-      <h2 style="font-size:14px;color:rgba(255,255,255,0.6);font-weight:400;margin:0 0 4px">${roleLabel}</h2>
-      <p style="color:#6b7a8d;font-size:12px;margin:0 0 28px">Report generated: ${new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
-      ${finalS ? `<div style="text-align:center;padding:20px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:8px;margin-bottom:28px">
-        <p style="font-size:10px;letter-spacing:0.14em;color:rgba(255,255,255,0.4);margin:0 0 8px">COMBINED VALIDATION SCORE</p>
-        <p style="font-size:48px;margin:0;font-weight:400">${escapeHtml(((decisionScore + employeeScore) / 2).toFixed(1))}<span style="font-size:20px;color:rgba(255,255,255,0.3)">/5</span></p>
-        <p style="font-size:15px;margin:8px 0 0;font-weight:600">${escapeHtml(demand)}</p>
+    const html = `<div style="font-family: Arial, sans-serif; background: #ffffff; color: #071208; padding: 40px; width: 750px; border: 1px solid #eee;">
+      <h1 style="font-size: 20px; color: ${accent}; margin: 0 0 8px; border-bottom: 2px solid ${accent}; padding-bottom: 12px;">
+        SEHATTI · GCC WELLBEING SURVEY
+      </h1>
+      <h2 style="font-size: 16px; color: #555; font-weight: 600; margin: 0 0 4px;">${roleLabel}</h2>
+      <p style="color: #999; font-size: 11px; margin: 0 0 32px;">Report generated: ${new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+
+      ${finalS ? `
+      <div style="text-align: center; padding: 24px; background: #f9f9f9; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 32px;">
+        <p style="font-size: 11px; color: #888; margin: 0 0 8px; letter-spacing: 0.1em;">COMBINED VALIDATION SCORE</p>
+        <p style="font-size: 48px; margin: 0; font-weight: bold; color: #071208;">${escapeHtml(((decisionScore + employeeScore) / 2).toFixed(1))}<span style="font-size: 20px; color: #bbb;"> / 5</span></p>
+        <p style="font-size: 14px; margin: 8px 0 0; font-weight: 600; color: ${accent};">${escapeHtml(demand)}</p>
       </div>` : ''}
-      <div style="text-align:center;padding:28px;background:rgba(255,255,255,0.04);border:1px solid ${accent}44;border-radius:8px;margin-bottom:28px">
-        <p style="font-size:10px;letter-spacing:0.14em;color:rgba(255,255,255,0.4);margin:0 0 8px">${escapeHtml(scoreLabel.toUpperCase())}</p>
-        <p style="font-size:64px;margin:0;font-weight:400;color:${accent}">${escapeHtml(myScore)}<span style="font-size:22px;color:rgba(255,255,255,0.3)">/100</span></p>
-        <p style="font-size:13px;color:rgba(255,255,255,0.5);margin:10px 0 0">Score (1-5): ${escapeHtml(fmt1(isDecision ? decisionScore : employeeScore))}</p>
+
+      <div style="text-align: center; padding: 32px; background: ${accent}10; border: 1px solid ${accent}40; border-radius: 8px; margin-bottom: 32px;">
+        <p style="font-size: 11px; color: #888; margin: 0 0 8px; letter-spacing: 0.1em;">${escapeHtml(scoreLabel.toUpperCase())}</p>
+        <p style="font-size: 64px; margin: 0; font-weight: bold; color: ${accent};">${escapeHtml(myScore)}<span style="font-size: 22px; color: #bbb;"> / 100</span></p>
+        <p style="font-size: 14px; color: #666; margin: 8px 0 0;">Average Rating: ${escapeHtml(fmt1(isDecision ? decisionScore : employeeScore))} / 5</p>
       </div>
-      ${isDecision
-        ? `<p style="margin:0 0 8px;color:rgba(255,255,255,0.7)"><strong>Problem Severity (Q8):</strong> ${dm.q8 != null ? escapeHtml(dm.q8) + ' / 5' : 'N/A'}</p>
-           <p style="margin:0 0 8px;color:rgba(255,255,255,0.7)"><strong>Budget Readiness (Q12):</strong> ${dm.q12 != null ? escapeHtml(dm.q12) + ' / 5' : 'N/A'}</p>
-           <p style="margin:0 0 8px;color:rgba(255,255,255,0.7)"><strong>Decision Timeline (Q13):</strong> ${dm.q13 != null ? escapeHtml(dm.q13) + ' / 5' : 'N/A'}</p>
-           <p style="margin:0 0 8px;color:rgba(255,255,255,0.7)"><strong>Pilot Approval (Q15):</strong> ${dm.q15 != null ? escapeHtml(dm.q15) + ' / 5' : 'N/A'}</p>
-           <p style="margin:0 0 8px;color:rgba(255,255,255,0.7)"><strong>AI Confidence (Q17):</strong> ${dm.q17 != null ? escapeHtml(dm.q17) + ' / 5' : 'N/A'}</p>`
-        : `<p style="margin:0 0 8px;color:rgba(255,255,255,0.7)"><strong>Stress Frequency (Q7):</strong> ${emp.q7 != null ? escapeHtml(emp.q7) + ' / 5' : 'N/A'}</p>
-           <p style="margin:0 0 8px;color:rgba(255,255,255,0.7)"><strong>Stress Severity (Q8):</strong> ${emp.q8 != null ? escapeHtml(emp.q8) + ' / 5' : 'N/A'}</p>
-           <p style="margin:0 0 8px;color:rgba(255,255,255,0.7)"><strong>Mental Health Need (Q11):</strong> ${emp.q11 != null ? escapeHtml(emp.q11) + ' / 5' : 'N/A'}</p>
-           <p style="margin:0 0 8px;color:rgba(255,255,255,0.7)"><strong>Tool Likelihood (Q12):</strong> ${emp.q12 != null ? escapeHtml(emp.q12) + ' / 5' : 'N/A'}</p>
-           <p style="margin:0 0 8px;color:rgba(255,255,255,0.7)"><strong>Usage Frequency (Q13):</strong> ${emp.q13 != null ? escapeHtml(emp.q13) + ' / 5' : 'N/A'}</p>`
-      }
-      <p style="font-size:10px;color:#3d4f62;text-align:center;margin-top:40px">survey.sehatti.com - Confidential - Data never sold</p>
+
+      <div style="margin-bottom: 32px;">
+        <p style="font-size: 13px; color: ${accent}; font-weight: bold; margin-bottom: 16px; letter-spacing: 0.05em; border-bottom: 1px solid #ddd; padding-bottom: 6px;">DETAILED BREAKDOWN</p>
+        <table style="width: 100%; border-collapse: collapse; color: #333; font-size: 13px;">
+          ${isDecision
+            ? `
+              <tr><td style="padding: 10px 0; border-bottom: 1px solid #eee;"><strong>Problem Severity (Q8)</strong></td><td style="text-align: right; padding: 10px 0; border-bottom: 1px solid #eee;">${dm.q8 != null ? escapeHtml(dm.q8) + ' / 5' : 'N/A'}</td></tr>
+              <tr><td style="padding: 10px 0; border-bottom: 1px solid #eee;"><strong>Budget Readiness (Q12)</strong></td><td style="text-align: right; padding: 10px 0; border-bottom: 1px solid #eee;">${dm.q12 != null ? escapeHtml(dm.q12) + ' / 5' : 'N/A'}</td></tr>
+              <tr><td style="padding: 10px 0; border-bottom: 1px solid #eee;"><strong>Decision Timeline (Q13)</strong></td><td style="text-align: right; padding: 10px 0; border-bottom: 1px solid #eee;">${dm.q13 != null ? escapeHtml(dm.q13) + ' / 5' : 'N/A'}</td></tr>
+              <tr><td style="padding: 10px 0; border-bottom: 1px solid #eee;"><strong>Pilot Approval (Q15)</strong></td><td style="text-align: right; padding: 10px 0; border-bottom: 1px solid #eee;">${dm.q15 != null ? escapeHtml(dm.q15) + ' / 5' : 'N/A'}</td></tr>
+              <tr><td style="padding: 10px 0; border-bottom: 1px solid #eee;"><strong>AI Confidence (Q17)</strong></td><td style="text-align: right; padding: 10px 0; border-bottom: 1px solid #eee;">${dm.q17 != null ? escapeHtml(dm.q17) + ' / 5' : 'N/A'}</td></tr>
+            `
+            : `
+              <tr><td style="padding: 10px 0; border-bottom: 1px solid #eee;"><strong>Stress Frequency (Q7)</strong></td><td style="text-align: right; padding: 10px 0; border-bottom: 1px solid #eee;">${emp.q7 != null ? escapeHtml(emp.q7) + ' / 5' : 'N/A'}</td></tr>
+              <tr><td style="padding: 10px 0; border-bottom: 1px solid #eee;"><strong>Stress Severity (Q8)</strong></td><td style="text-align: right; padding: 10px 0; border-bottom: 1px solid #eee;">${emp.q8 != null ? escapeHtml(emp.q8) + ' / 5' : 'N/A'}</td></tr>
+              <tr><td style="padding: 10px 0; border-bottom: 1px solid #eee;"><strong>Mental Health Need (Q11)</strong></td><td style="text-align: right; padding: 10px 0; border-bottom: 1px solid #eee;">${emp.q11 != null ? escapeHtml(emp.q11) + ' / 5' : 'N/A'}</td></tr>
+              <tr><td style="padding: 10px 0; border-bottom: 1px solid #eee;"><strong>Tool Likelihood (Q12)</strong></td><td style="text-align: right; padding: 10px 0; border-bottom: 1px solid #eee;">${emp.q12 != null ? escapeHtml(emp.q12) + ' / 5' : 'N/A'}</td></tr>
+              <tr><td style="padding: 10px 0; border-bottom: 1px solid #eee;"><strong>Usage Frequency (Q13)</strong></td><td style="text-align: right; padding: 10px 0; border-bottom: 1px solid #eee;">${emp.q13 != null ? escapeHtml(emp.q13) + ' / 5' : 'N/A'}</td></tr>
+            `
+          }
+        </table>
+      </div>
+
+      <div style="text-align: center; margin-top: 48px; border-top: 1px solid #eee; padding-top: 16px;">
+        <p style="font-size: 11px; color: #aaa;">survey.sehatti.com · Confidential Report · Data never sold</p>
+      </div>
     </div>`
 
-    const el = document.createElement('div')
-    el.innerHTML = html
-    el.style.cssText = 'position:fixed;top:-9999px;left:-9999px;width:800px;'
-    document.body.appendChild(el)
     const filename = isDecision ? 'Sehatti_Decision_Maker_Report.pdf' : 'Sehatti_Employee_Report.pdf'
-    html2pdf().set({ margin: 0, filename, html2canvas: { scale: 2, backgroundColor: '#0d1b2a' }, jsPDF: { unit: 'px', format: [800, 1130], orientation: 'portrait' } })
-      .from(el).save().then(() => document.body.removeChild(el))
+    const opt = {
+      margin: 10,
+      filename: filename,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: {
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: '#ffffff',
+        width: 750,
+        windowWidth: 750
+      },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    }
+
+    html2pdf().set(opt).from(html).save().catch(err => {
+      console.error('PDF Generation Error:', err)
+    })
   }
 
-  /* ── Download JSON (only own data) ── */
-  const handleDownloadJSON = () => {
-    const key = isDecision ? 'decisionMakerSurvey' : 'employeeSurvey'
-    const data = { exportedAt: new Date().toISOString(), [key]: myData || null }
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = isDecision ? 'sehatti_decision_results.json' : 'sehatti_employee_results.json'
-    document.body.appendChild(a); a.click()
-    document.body.removeChild(a); URL.revokeObjectURL(url)
-  }
+  /* ── Download JSON ── REMOVED ── */
 
   return (
     <div className={styles.page}>
@@ -554,7 +614,6 @@ const SurveyResultsPage = ({
         {/* ── Bottom actions ── */}
         <div className={styles.bottomActions}>
           <button className={styles.btnGold} onClick={onRetake}>Take Another Survey</button>
-          <button className={styles.btnGhost} onClick={handleDownloadJSON}>Download JSON</button>
           <button className={styles.btnGhost} onClick={onBack}>← Back to Home</button>
           <span className={styles.trustNote}>survey.sehatti.com · Secure · Data never sold</span>
         </div>
